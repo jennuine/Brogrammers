@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Location Manager Page</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/sandstone/bootstrap.min.css" rel="stylesheet">
+    <script>
+        var loc_id = {{location.id}};
+    </script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Morgantown College Food Services</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Workers</a></li>
+                <form method='POST' class='navbar-form navbar-right'>
+                    <input type="hidden" name="logout" value="yes">
+                    <button class="btn btn-primary" type="submit">Logout</button>
+                </form>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container" style="position:absolute; top: 60px;">
+    <div class="col-md-2">
+        <h3>Meal Hours:</h3>
+        <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;}
+            .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+        </style>
+        <table class="tg">
+            <tr>
+                <th class="tg-031e"></th>
+                <th class="tg-031e">Hours:</th>
+            </tr>
+            <tr>
+                <td class="tg-031e">Monday</td>
+                <td class="tg-031e" id="oM">{{location.hours.m}}</td>
+            </tr>
+            <tr>
+                <td class="tg-031e">Tuesday</td>
+                <td class="tg-031e" id="oT">{{location.hours.t}}<br></td>
+            </tr>
+            <tr>
+                <td class="tg-031e">Wednesday</td>
+                <td class="tg-031e" id="oW">{{location.hours.w}}</td>
+            </tr>
+            <tr>
+                <td class="tg-031e">Thursday</td>
+                <td class="tg-031e" id="oR">{{location.hours.r}}</td>
+            </tr>
+            <tr>
+                <td class="tg-031e">Friday</td>
+                <td class="tg-031e" id="oF">{{location.hours.f}}</td>
+            </tr>
+            <tr>
+                <td class="tg-031e">Saturday</td>
+                <td class="tg-031e" id="oS">{{location.hours.s}}</td>
+            </tr>
+            <tr>
+                <td class="tg-031e">Sunday</td>
+                <td class="tg-031e" id="oSu">{{location.hours.su}}</td>
+            </tr>
+        </table>
+        <div id="edit"><button onclick="edit()">Edit Hours</button></div><br>
+    </div>
+    <div class="col-md-6">
+        <h3>Transactions:</h3>
+        <canvas id="chart" style="width: 100%"></canvas>
+    </div>
+</div><!-- /.container -->
+
+<div id="mask" style="z-index: 9000; position: absolute; visibility: hidden"><img src="mask.png"><</div>
+
+<div id ="editHours" style="
+    position: absolute;
+    top: 75px;
+    left: 100px;
+    z-index: 9001;
+    background-color: #2b2b2b;
+    border: 2px solid black;
+    width: 500px;
+    height: 550px;
+    visibility: hidden">
+    <h3 align="center" style="color: #ffffff; left: 60px;">Edit Hours:</h3><br>
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+        .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+        .tg .tg-031d{color:#ffffff}
+    </style>
+    <form id="hoursForm">
+    <input type="hidden" name="loc_id" value="{{location.id}}">
+    <table align="center" class="tg">
+        <tr>
+            <th class="tg-031d">Day</th>
+            <th class="tg-031d">Hours</th>
+        </tr>
+        <td class="tg-031d">Monday</td>
+            <td id="M" class="tg-031d"><input style="color:black" name="m" value="{{location.hours.m}}"/></td>
+        </tr>
+        <tr>
+            <td class="tg-031d">Tuesday</td>
+            <td id="T" class="tg-031d"><input style="color:black" name="t" value="{{location.hours.t}}"/></td>
+        </tr>
+        <tr>
+            <td class="tg-031d">Wednesday</td>
+            <td id="W" class="tg-031d"><input style="color:black" name="w" value="{{location.hours.w}}"/></td>
+        </tr>
+        <tr>
+            <td class="tg-031d">Thursday</td>
+            <td id="R" class="tg-031d"><input style="color:black" name="r" value="{{location.hours.r}}"/></td>
+        </tr>
+        <tr>
+            <td class="tg-031d">Friday</td>
+            <td id="F" class="tg-031d"><input style="color:black" name="f" value="{{location.hours.f}}"/></td>
+        </tr>
+        <tr>
+            <td class="tg-031d">Saturday</td>
+            <td id="S" class="tg-031d"><input style="color:black" name="s" value="{{location.hours.s}}"/></td>
+        </tr>
+        <tr>
+            <td class="tg-031d">Sunday</td>
+            <td id="Su" class="tg-031d"><input style="color:black" name="su" value="{{location.hours.su}}"/></td>
+        </tr>
+        <tr>
+    </table><br>
+    <button class="btn btn-primary" id="confirmButton">Confirm</button> 
+    </form>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/location.js"></script>
+<script type="text/javascript" src="/static/init.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script>
+    $(function() {
+        $.getJSON('/api/transactions', {'loc_id': loc_id}, function(data) {
+            var ctx = document.getElementById("chart").getContext("2d");
+            var info = {
+                labels: Object.keys(data),
+                datasets: [
+                    {
+                        label: "My Second dataset",
+                        fillColor: "rgba(41, 171, 224,0.2)",
+                        strokeColor: "rgba(41, 171, 224,1)",
+                        pointColor: "rgba(41, 171, 224,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: []
+                    }
+                ]
+            };
+            for(var k in data) {
+                if(!data.hasOwnProperty(k))
+                    continue;
+                console.log(k)
+                info.datasets[0].data.push(data[k]);
+            }
+            console.log(info);
+            var myLineChart = new Chart(ctx).Line(info);
+        });
+    });
+</script>
+
+</body>
+</html>

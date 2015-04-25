@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/sandstone/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="container" style="margin-top:68px">
+            <nav class="navbar navbar-default navbar-fixed-top">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">
+                    <i class="fa fa-server"></i>
+                  </a>
+                </div>
+                <form method='POST' class='navbar-form navbar-right'>
+                    <input type="hidden" name="logout" value="yes">
+                    <button class="btn btn-primary" type="submit">Logout</button>
+                </form>
+                <p class="navbar-text navbar-right">#0000001</p>
+                <p class="navbar-text navbar-right"><strong>Jane Smith</strong></p>
+              </div>
+            </nav>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <thead>
+                            <th>Total Sales</th>
+                            <th>Location</th>
+                            {% for mealplan in mealplans %}
+                            <th>{{mealplan.name}}</th>
+                            {% for mealplan in mealplans %}
+                            <th>{{mealplan.name}}</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{location}}</td>
+                                {% for mealplan in mealplans %}
+                                <td>{{mealplan.sales}}</td>
+                                
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
