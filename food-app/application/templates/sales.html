@@ -1,51 +1,281 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/sandstone/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    </head>
-    <body>
-        <div class="container" style="margin-top:68px">
-            <nav class="navbar navbar-default navbar-fixed-top">
-              <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="#">
-                    <i class="fa fa-server"></i>
-                  </a>
-                </div>
-                <form method='POST' class='navbar-form navbar-right'>
-                    <input type="hidden" name="logout" value="yes">
-                    <button class="btn btn-primary" type="submit">Logout</button>
-                </form>
-                <p class="navbar-text navbar-right">#0000001</p>
-                <p class="navbar-text navbar-right"><strong>Jane Smith</strong></p>
-              </div>
-            </nav>
-            <div class="row">
-                <div class="col-lg-12">
-                    <table class="table">
-                        <thead>
-                            <th>Total Sales</th>
-                            <th>Location</th>
-                            {% for mealplan in mealplans %}
-                            <th>{{mealplan.name}}</th>
-                            {% for mealplan in mealplans %}
-                            <th>{{mealplan.name}}</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{location}}</td>
-                                {% for mealplan in mealplans %}
-                                <td>{{mealplan.sales}}</td>
-                                
-                                
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Carnivore Admin</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/bootstrap/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/static/bootstrap/css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        var sales_data = {{sales.area_data()}};
+        var donut_data = {{sales.donut_data()}};
+        var by_location = {{sales.by_location()}};
+    </script>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="sales.html">
+                    <img style="max-height: 50px; margin-top: -7px" src="./static/images/logo_white.png"></img>
+                </a>
             </div>
+            <ul class="nav navbar-right top-nav">
+                <li>
+                   <form method='POST' class='navbar-form navbar-right'>
+                <input type="hidden" name="logout" value="yes">
+                <button class="btn btn-primary" type="submit">Logout</button>
+            </form>
+            <p class="navbar-text navbar-right"><strong>{{req.user.name}}</strong></p>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <img style="max-height: 150px; margin-top: -7px" src="{{req.user.pic_path}}"></img>
+                                <br>
+                            </div>
+                            <div class="panel-footer">Name: {{req.user.name}}
+                                <br> ID# {{req.user.id}}
+                                <br> Email: {{req.user.email}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="active">
+                        <a href="/sales"><i class="fa fa-fw fa-bar-chart-o"></i> Sales Report</a>
+                    </li>
+                    <li>
+                        <a href="/transactions"><i class="fa fa-fw fa-table"></i> Transaction History</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Sales Report <small>Statistics Overview</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-bar-chart-o"></i> Sales Report
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{user_count}}</div>
+                                        <div>Users</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-shopping-cart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{sales.day.length}}</div>
+                                        <div>New Sales!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Sales Chart</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="salesChart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Sales by Type</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="salesType"></div>
+                                <div class="text-right">
+                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Sales by Location</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="byLocation"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Latest Transactions</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Order #</th>
+                                                <th>Order Date</th>
+                                                <th>Order Time</th>
+                                                <th>Amount (USD)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for transaction in sales.latest %}
+                                            <tr>
+                                                <td>{{transaction.id}}</td>
+                                                <td>{{transaction.date.getMonth()}}/{{transaction.date.getDate()}}/{{transaction.date.getFullYear()}}</td>
+                                                <td>{{zpad(transaction.date.getHours())}}:{{zpad(transaction.date.getMinutes())}}</td>
+                                                <td>${{transaction.price}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-right">
+                                    <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
         </div>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    </body>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+        $(function() {
+            Morris.Area({
+              element: 'salesChart',
+              data: sales_data,
+              xkey: 'day',
+              ykeys: ['1', '2', '3'],
+              labels: ['Students', 'Staff', 'Faculty']
+            });
+            Morris.Donut({
+                element: 'salesType',
+                data: donut_data
+            });
+            Morris.Donut({
+                element: 'byLocation',
+                data: by_location
+            });
+        });
+    </script>
+
+</body>
+
 </html>

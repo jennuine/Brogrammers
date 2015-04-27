@@ -1,9 +1,9 @@
 Q = require 'q'
 sql = require '../sql.coffee'
+user = require './user.coffee'
 
 class Location
     constructor: (@id, @hours, @manager, @name) ->
-    
         
     updateHours: (hours) =>
         Q.Promise (resolve) =>
@@ -33,10 +33,21 @@ class Location
                     resolve undefined
                 else
                     resolve new Location(rows[0].id, JSON.parse(rows[0].hours), manager, rows[0].name)
-    
+                    
+    @getManagerInfo: () ->
+        Q.Promise (resolve) ->
+            sql.conn.query 'select * from users where username = ?', [@manager], (err, rows, fields) ->
+                if err
+                    throw err
+                if rows.length == 0
+                    resolve undefined
+                else
+                    user.getUser(@manager).then (user)
+                    resolve user
+                    
     @add: (location) ->
         Q.Promise (resolve) ->
-            sql.conn.query 'insert into locations values (default, ?, ?, ?)', 
+            sql.conn.query 'insert into locations values (default, ?, ?, ?, ?)', 
             [location.manager, location.name, JSON.stringify(location.hours)], (err, rows, fields) ->
                 if err
                     throw err

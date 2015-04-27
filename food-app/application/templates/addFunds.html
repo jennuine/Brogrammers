@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Parent's Page</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="parent.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/sandstone/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img style="max-height: 50px; margin-top: -7px" src="./static/images/logo_white.png"></img>
+            </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Login</a></li>
+                <li class="active"><a href="#">Parents</a></li>
+                <li><a href="/public">Public</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<img style="height:1500px; width:auto; position:absolute; z-index:0; margin-top: -20px;" src="./static/images/backgroun.jpg"></img>
+        <div class="container" style="margin-top:70px">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="well">
+                        <div align="center"><img src="./static/images/add.png"></img></div>
+                                <div class="form-group">
+                                <h3 align="center">Swipes to Add: <input type="text" placeholder="swipes: " name="swipes" id="swipes"class="form-swipes"></h3>
+                                <h3 align="center">Dining Dollars to Add: <input type="text" placeholder="Dining Dollars to Add: " name="dollars" id="dollars"class="form-dollars"></h3>
+                                  <form method="post" action="" ENCTYPE="multipart/form-data">
+                                    <!-- required parameters CH_uId or CH_toEmail -->
+                                    <input type="hidden" name="CH_uId" value="3487961">
+                                    
+                                    <!-- optional parameters CH_successPage and CH_errorPage -->
+                                    <input type="hidden" name="CH_successPage" value="http://www.yourserver.com/success">
+                                    <input type="hidden" name="CH_errorPage" value="http://www.yourserver.com/error">
+                                    
+                                    <!-- other optional parameters CH_fromName, CH_fromEmail CH_subject -->
+                                    <input type="hidden" name="CH_fromName" value="CryptoHeaven Secure Form">
+                                    <input type="hidden" name="CH_fromEmail" value="my-forms@cryptoheaven.com">
+                                    <input type="hidden" name="CH_subject" value="Your Site Payment Form">
+                                    
+                                    <!-- your regular form follows -->
+                                    <table width=518 border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                                      <tr bgcolor="#E5E5E5"> 
+                                        <td height="22" colspan="3" align="left" valign="middle"><strong>&nbsp;Billing Information (required)</strong></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" width="180" align="right" valign="middle">First Name:</td>
+                                        <td colspan="2" align="left"><input name="firstName" type="text" size="50"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Last Name:</td>
+                                        <td colspan="2" align="left"><input name="lastName" type="text" size="50"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Company (optional):</td>
+                                        <td colspan="2" align="left"><input name="company" type="text" size="50"></td>
+                                      </tr> 
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Street Address:</td>
+                                        <td colspan="2" align="left"><input name="address1" type="text" value="" size="50"></td>
+                                      </tr> 
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Street Address (2):</td>
+                                        <td colspan="2" align="left"><input name="address2" type="text" value="" size="50"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">City:</td>
+                                        <td colspan="2" align="left"><input name="city" type="text" value="" size="50"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">State/Province:</td>
+                                        <td colspan="2" align="left"><input name="state" type="text" value="" size="50"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Zip/Postal Code:</td>
+                                        <td colspan="2" align="left"><input name="zip" type="text" value="" size="50"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Country:</td>
+                                        <td colspan="2" align="left"><input name="country" type="text" value="" size="50"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Phone:</td>
+                                        <td colspan="2" align="left"><input name="phone" type="text" value="" size="50"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" colspan="3" align="left" valign="middle">&nbsp;</td>
+                                      </tr>
+                                      <tr bgcolor="#E5E5E5"> 
+                                        <td height="22" colspan="3" align="left" valign="middle"><strong>&nbsp;Credit Card (required)</strong></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Credit Card Number:</td>
+                                        <td colspan="2" align="left"><input name="CCNo" type="text" value="" size="19" maxlength="40"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Expiry Date:</td>
+                                        <td colspan="2" align="left">
+                                          <SELECT NAME="CCExpiresMonth" >
+                                            <OPTION VALUE="" SELECTED>--Month--
+                                            <OPTION VALUE="01">January (01)
+                                            <OPTION VALUE="02">February (02)
+                                            <OPTION VALUE="03">March (03)
+                                            <OPTION VALUE="04">April (04)
+                                            <OPTION VALUE="05">May (05)
+                                            <OPTION VALUE="06">June (06)
+                                            <OPTION VALUE="07">July (07)
+                                            <OPTION VALUE="08">August (08)
+                                            <OPTION VALUE="09">September (09)
+                                            <OPTION VALUE="10">October (10)
+                                            <OPTION VALUE="11">November (11)
+                                            <OPTION VALUE="12">December (12)
+                                          </SELECT> /
+                                          <SELECT NAME="CCExpiresYear">
+                                            <OPTION VALUE="" SELECTED>--Year--
+                                            <OPTION VALUE="04">2004
+                                            <OPTION VALUE="05">2005
+                                            <OPTION VALUE="06">2006
+                                            <OPTION VALUE="07">2007
+                                            <OPTION VALUE="08">2008
+                                            <OPTION VALUE="09">2009
+                                            <OPTION VALUE="10">2010
+                                            <OPTION VALUE="11">2011
+                                            <OPTION VALUE="12">2012
+                                            <OPTION VALUE="13">2013
+                                            <OPTION VALUE="14">2014
+                                            <OPTION VALUE="15">2015
+                                          </SELECT>
+                                        </td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" colspan="3" align="left" valign="middle">&nbsp;</td>
+                                      </tr>
+                                      <tr bgcolor="#E5E5E5"> 
+                                        <td height="22" colspan="3" align="left" valign="middle"><strong>&nbsp;Additional Information</strong></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="middle">Contact Email:</td>
+                                        <td colspan="2" align="left"><input name="contactEmail" type="text" value="" size="50"></td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" colspan="3" align="left" valign="middle">&nbsp;</td>
+                                      </tr>
+                                      <tr> 
+                                        <td height="22" align="right" valign="top">Special Notes:</td>
+                                        <td colspan="2" align="left"><textarea name="notes" cols="45" rows="4"></textarea></td>
+                                      </tr>
+                                    </table>
+                                    </form>
+                                </div>
+                                <button class="btn btn-primary" id="confirm-btn">Confirm</button>
+                        </h3><br>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="./node_module/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+            $(function(){
+                $('#confirm-btn').click(function() {
+                    $.post('/api/addFunds', {'email': '{{req.session.email}}', 'dollars': $('#dollars').val(), 'swipes': $('#swipes').val()},function(){
+                        alert("Transaction Completed");
+                    });
+                });
+            });
+</script>
+                        
+                        
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

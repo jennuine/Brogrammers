@@ -44,9 +44,15 @@
                 <li><a href="home.html">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
+         <br>
     </div>
 </nav>
-
+<div class="container" style="position:absolute; top: 50px; left: 600px;">
+    <div class="starter-template">
+        <img style="max-height: 150px; margin-top: -7px" src="{{req.user.pic_path}}"></img><br>
+        <h1>Welcome {{req.user.name}}!</h1><br>
+    </div>
+</div>
 <div class="container" style="position:absolute; top: 60px;">
     <div class="starter-template">
         <h1>Select Payment Method:</h1><br>

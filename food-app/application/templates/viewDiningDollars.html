@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dining Dollars</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/bootstrap/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <img style="max-height: 50px; margin-top: -7px" src="./static/images/logo_white.png"></img>
+                </a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li>
+                   
+                   
+                   <form method='POST' class='navbar-form navbar-right'>
+                <input type="hidden" name="logout" value="yes">
+                <button class="btn btn-primary" type="submit">Logout</button>
+            </form>
+            <p class="navbar-text navbar-right"><strong>{{req.user.username}}</strong></p>
+            
+            
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <img style="max-height: 150px; margin-top: -7px" src="{{req.user.pic_path}}"></img>
+                                <br>
+                            </div>
+                            <div class="panel-footer">Name: {{req.user.name}}
+                                <br> ID# {{req.user.id}}
+                                <br> Email: {{req.user.email}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Dining Dollars
+                        </h1>
+                        
+                    </div>
+                   
+                    <div class="jumbotron">
+                    <h2>Available: {{req.user.max_dollars - req.user.dollars}} as of <p id="date"></p></h2>
+                     <script>
+                        document.getElementById("date").innerHTML = new Date();
+                    </script> 
+                    <br><br>
+                    <p>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-credit-card fa-2x"></i> Purchase Dining Dollars
+                        </button>
+                    </p>
+                    </p>
+                
+                    </div>
+                </div>
+                
+                <!-- /.row -->
+
+                
+                
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Please enter your credit card information:</h4>
+                      </div>
+                      <div class="modal-body" id="creditModal">
+                        <!-- your regular form follows -->
+                        
+                        <table width=518 border="0" cellpadding="0" cellspacing="0" id="credit'">
+                            <tr>
+                                <td height="22" width="180" align="right" valign="middle">Dining Dollars to Add: </td>
+                                <td colspan="2" align="left"><input name="diningDollars" id="diningDollars" type="text" size="50"></td>
+                            </tr>
+                            <tr>
+                                <td height="22" colspan="3" align="left" valign="middle"><strong>&nbsp;Billing Information (required)</strong></td>
+                            </tr>
+                            <tr>
+                                <td height="22" width="180" align="right" valign="middle">First Name:</td>
+                                <td colspan="2" align="left"><input name="firstName" type="text" size="50"></td>
+                            </tr>
+                            <tr>
+                                <td height="22" align="right" valign="middle">Last Name:</td>
+                                <td colspan="2" align="left"><input name="lastName" type="text" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">Company (optional):</td>
+                                <td colspan="2" align="left"><input name="company" type="text" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">Street Address:</td>
+                                <td colspan="2" align="left"><input name="address1" type="text" value="" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">Street Address (2):</td>
+                                <td colspan="2" align="left"><input name="address2" type="text" value="" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">City:</td>
+                                <td colspan="2" align="left"><input name="city" type="text" value="" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">State/Province:</td>
+                                <td colspan="2" align="left"><input name="state" type="text" value="" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">Zip/Postal Code:</td>
+                                <td colspan="2" align="left"><input name="zip" type="text" value="" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">Country:</td>
+                                <td colspan="2" align="left"><input name="country" type="text" value="" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">Phone:</td>
+                                <td colspan="2" align="left"><input name="phone" type="text" value="" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" colspan="3" align="left" valign="middle">&nbsp;</td>
+                            </tr>
+                            <tr  >
+                                <td height="22" colspan="3" align="left" valign="middle"><strong>&nbsp;Credit Card (required)</strong></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">Credit Card Number:</td>
+                                <td colspan="2" align="left"><input name="CCNo" type="text" value="" size="19" maxlength="40"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">Expiry Date:</td>
+                                <td colspan="2" align="left">
+                                    <SELECT NAME="CCExpiresMonth" >
+                                        <OPTION VALUE="" SELECTED>--Month--
+                                        <OPTION VALUE="01">January (01)
+                                        <OPTION VALUE="02">February (02)
+                                        <OPTION VALUE="03">March (03)
+                                        <OPTION VALUE="04">April (04)
+                                        <OPTION VALUE="05">May (05)
+                                        <OPTION VALUE="06">June (06)
+                                        <OPTION VALUE="07">July (07)
+                                        <OPTION VALUE="08">August (08)
+                                        <OPTION VALUE="09">September (09)
+                                        <OPTION VALUE="10">October (10)
+                                        <OPTION VALUE="11">November (11)
+                                        <OPTION VALUE="12">December (12)
+                                    </SELECT> /
+                                    <SELECT NAME="CCExpiresYear">
+                                        <OPTION VALUE="" SELECTED>--Year--
+                                        <OPTION VALUE="04">2004
+                                        <OPTION VALUE="05">2005
+                                        <OPTION VALUE="06">2006
+                                        <OPTION VALUE="07">2007
+                                        <OPTION VALUE="08">2008
+                                        <OPTION VALUE="09">2009
+                                        <OPTION VALUE="10">2010
+                                        <OPTION VALUE="11">2011
+                                        <OPTION VALUE="12">2012
+                                        <OPTION VALUE="13">2013
+                                        <OPTION VALUE="14">2014
+                                        <OPTION VALUE="15">2015
+                                    </SELECT>
+                                </td>
+                            </tr>
+                            <tr  >
+                                <td height="22" colspan="3" align="left" valign="middle">&nbsp;</td>
+                            </tr>
+                            <tr  >
+                                <td height="22" colspan="3" align="left" valign="middle"><strong>&nbsp;Additional Information</strong></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="middle">Contact Email:</td>
+                                <td colspan="2" align="left"><input name="contactEmail" type="text" value="" size="50"></td>
+                            </tr>
+                            <tr  >
+                                <td height="22" colspan="3" align="left" valign="middle">&nbsp;</td>
+                            </tr>
+                            <tr  >
+                                <td height="22" align="right" valign="top">Special Notes:</td>
+                                <td colspan="2" align="left"><textarea name="notes" cols="45" rows="4"></textarea></td>
+                            </tr>
+                        </table>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button id="credit-btn" class="btn btn-primary">Confirm</button>
+                         
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $(function(){
+            $('#credit-btn').click(function() {
+                $('#creditModal').modal('hide');
+                $.post('/api/userCredit', {'user_id': {{req.user.user_id}}, 'dollars': $('#diningDollars').val()}, function() {
+                    
+                    alert("Transaction Completed");
+                });
+            });
+            
+        });
+    </script>
+
+</body>
+
+</html>

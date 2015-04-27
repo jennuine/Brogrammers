@@ -5,11 +5,15 @@
     </head>
     <body>
         {% if req.user && req.user.user_type == 1 %}
+        
+        <META http-equiv="refresh" content="0;URL=https://brogrammers-jennuine.c9.io/student">
+
         <div class="container" style="margin-top:68px">
             <nav class="navbar navbar-default navbar-fixed-top">
               <div class="container-fluid">
                 <div class="navbar-header">
                   <a class="navbar-brand" href="#">
+                      <img style="max-height: 50px; margin-top: -7px" src="./static/images/logo_white.png"></img>
                     <i class="fa fa-server"></i>
                   </a>
                 </div>
@@ -17,7 +21,7 @@
                     <input type="hidden" name="logout" value="yes">
                     <button class="btn btn-primary" type="submit">Logout</button>
                 </form>
-                <p class="navbar-text navbar-right">#0000000</p>
+                <p class="navbar-text navbar-right">#{{req.user.id}}</p>
                 <p class="navbar-text navbar-right"><strong>{{req.user.name}}</strong></p>
               </div>
             </nav>
@@ -91,45 +95,68 @@
           <div class="container-fluid">
             <div class="navbar-header">
               <a class="navbar-brand" href="#">
-                <i class="fa fa-server"></i>
+                 <img style="max-height: 50px; margin-top: -7px" src="./static/images/logo_white.png"></img>
               </a>
             </div>
             <form method='POST' class='navbar-form navbar-right'>
                 <input type="hidden" name="logout" value="yes">
                 <button class="btn btn-primary" type="submit">Logout</button>
             </form>
-            <p class="navbar-text navbar-right">#0000000</p>
+            <p class="navbar-text navbar-right">#{{req.user.id}}</p>
             <p class="navbar-text navbar-right"><strong>{{req.user.name}}</strong></p>
           </div>
         </nav>
-        <div class="container" style="margin-top:68px">
+        <img style="max-width:100%; height: auto; position:absolute; z-index:0; margin-top: -20px;" src="./static/images/jungle.jpg"></img>
+        <div class="container" style="margin-top:70px">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     <div class="well">
-                        <h2>Begin Scanning</h2>
-                        <input type="text" id="username" placeholder="Username"/>
+                        <div align="center"><img src="./static/images/bs.png"></img></div>
+                        <div align="center"><input type="text" id="user_id" placeholder="User ID Number"/></div>
                         <br><br>
-                        <button class="btn btn-primary" id="swipe-btn">Swipe</button>
+                        <div align="center"><button class="btn btn-primary" id="swipe-btn">Swipe</button></div>
                         <br><br>
-                        <button class="btn btn-primary" id="dollar-btn">Dining Dollars</button>
+                        <div align="center"><button class="btn btn-primary" id="dollar-btn">Dining Dollars</button></div>
                         <br><br>
-                        <button class="btn btn-primary" id="cash-btn">Cash</button>
+                        <div align="center"><button class="btn btn-primary" id="cash-btn">Cash</button></div>
                         <br><br>
-                        <button class="btn btn-primary" id="credit-btn">Credit Card</button>
+                        <div align="center"><button class="btn btn-primary" id="credit-btn">Credit Card</button></div>
                     </div>
                 </div>
+                
+                 <div class="col-md-4 col-md-offset-4" style="position: absolute; top: 60px; left: 500px;">
+                    <div class="well">
+                        <img style="max-height: 150px; margin-top: -7px" src="{{req.user.pic_path}}"></img><br>
+                        <h1>Welcome {{req.user.name}}!</h1><br>
+                    </div>
+                </div>
+                
             </div>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="./node_module/bootstrap/dist/js/bootstrap.min.js"></script>
         <script>
             $(function(){
                 $('#swipe-btn').click(function() {
-                    $.post('/api/swipe', {'username': $('#username').val()});
-                    alert("Transaction Completed");
+                    $.post('/api/swipe', {'user_id': $('#user_id').val()}, function(){
+                        alert("Transaction Completed");
+                    });
+
                 });
                 $('#dollar-btn').click(function() {
-                    $.post('/api/useDollars', {'username': $('#username').val(), 'dollars': 5});
-                    alert("Transaction Completed");
+                    $.post('/api/useDollars', {'user_id': $('#user_id').val(), 'dollars': 5}, function() {
+                        alert("Transaction Completed");    
+                    });
+                });
+                $('#credit-btn').click(function() {
+                    $.post('/api/useCredit', {'user_id': $('#user_id').val(), 'dollars': 5}, function() {
+                        alert("Transaction Completed");
+                    });
+                });
+                $('#cash-btn').click(function() {
+                    $.post('/api/useCash', {'user_id': $('#user_id').val(), 'dollars': 5}, function() {
+                        alert("Transaction Completed");
+                    });
                 });
             });
         </script>
@@ -140,6 +167,7 @@
                 <div class="navbar-header">
                   <a class="navbar-brand" href="#">
                     <i class="fa fa-server"></i>
+                    <img style="max-height: 50px; margin-top: -7px" src="./static/images/logo_white.png"></img>
                   </a>
                 </div>
                 <form method='POST' class='navbar-form navbar-right'>
@@ -170,45 +198,68 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         {% else %}
-        <div class="content" style="margin-top:68px">
-            <nav class="navbar navbar-default navbar-fixed-top">
-              <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="#">
-                    <i class="fa fa-server"></i>
-                  </a>
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="parents.html">Parent Portal</a></li>
-                    <li><a href="/register">Register</a></li>
-                </ul>
-              </div>
-            </nav>
-            <div class="row" style="margin-top: 256px;">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="well">
-                        <form class="form-horizontal" method="POST">
-                          <fieldset>
-                            <legend>Login</legend>
-                            <div class="form-group">
-                              <label for="username" class="col-lg-2 control-label">Username</label>
-                              <div class="col-lg-10">
-                                <input class="form-control" id="username" placeholder="Username" type="text" name="username" value="{{user.username}}">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-                              <div class="col-lg-10">
-                                <input class="form-control" id="inputPassword" placeholder="Password" type="password" name="password">
-                              </div>
-                            </div>
-                            <button class="btn btn-primary pull-right" type="submit">Submit</button>
-                          </fieldset>
-                       </form>
-                    </div>
-                </div>
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">
+                  <img style="max-height: 50px; margin-top: -7px" src="./static/images/logo_white.png"></img>
+              </a>
             </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <form class="navbar-form navbar-right" method="POST">
+                <div class="form-group">
+                  <input type="text" placeholder="Username" name="username" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="password" placeholder="Password" name="password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+              </form>
+            </div><!--/.navbar-collapse -->
+          </div>
+        </nav>
+    
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron" style="margin-top: 0px;">
+          <img style="position: absolute; z-index: 0; margin-top: 0px; max-width: 100%; height: auto" src="./static/images/backgroun.jpg"></img>
+          <div class="container">
+            <h1 style="position: absolute; z-index: 1; top: 75px; color: black;">Welcome, Morgantown!</h1>
+            <p style="position: absolute; z-index: 1; top: 180px; color: black;">This is the Morgantown College Food Services Carnivore System.</p>
+          </div>
         </div>
+    
+        <div style="margin-top: 150px"class="container">
+          <!-- Example row of columns -->
+          <div class="row">
+            <div class="col-md-4">
+              <h2 style="color: black">Parents</h2>
+              <p style="color: black">Don't let your children starve! Add funds to your students mealplan and or dining dollars. </p>
+              <p><a class="btn btn-primary" href="/parents" role="button">Add Funds &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+              <h2 style="color: black">Public</h2>
+              <p style="color: black">Register as a member of the general public and make a one-time payment to recieve our 15-meal meal plan. Good at all dining hall locations. </p>
+              <p><a class="btn btn-primary" href="/createPub" role="button">Create Account &raquo;</a></p>
+           </div>
+            <div class="col-md-4">
+              <h2 style="color: black">More Information</h2>
+              <p style="color: black">Click here to learn more about the meal plans and dining locations available through Morgantown College.</p>
+              <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+          </div>
+    
+          <hr>
+    
+          <footer>
+            <p>&copy; Brogrammers 2015</p>
+          </footer>
+        </div> <!-- /container -->
         {% endif %}
     </body>
 </html>
